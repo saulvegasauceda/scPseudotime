@@ -6,6 +6,6 @@
 
 To-do list:
 - [ ] Merge with Stephanie.
-- [ ] Remove interneurons & glial cells from analysis.  
+- [x] Remove interneurons & glial cells from analysis.  
 - [ ] Create Monocle3-like function that draws path of all possible trajectories.
 - [ ] Add guide/roadmap to README that explains the steps of the analysis.
