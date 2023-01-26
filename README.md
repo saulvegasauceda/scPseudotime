@@ -12,6 +12,7 @@ To-do list:
 
 ---
 
+```bash 
 .
 ├── LICENSE
 ├── README.md
@@ -22,3 +23,4 @@ To-do list:
 ├── job_scripts
 │   └── ...     # scripts submitted to HCS cluster
 └── processing_arlotta_data.py      # script compiling the analysis done in the notebooks
+``` 
