@@ -2,6 +2,7 @@ import anndata
 import scvelo as scv
 import scanpy as sc
 import pandas as pd
+from scipy.sparse import csr_matrix
 
 path_to_umap = "/home/gridsan/ssauceda/neuroTF_shared/mouse_cortex_development/umap/"
 umap_coords_file = path_to_umap + "cluster_scDevSC.merged.umap.txt"
@@ -48,9 +49,12 @@ sc.pp.highly_variable_genes(adata, flavor='seurat_v3', n_top_genes=3000)
 scv.pp.log1p(adata)
 regress_out = ['nCount_RNA', 'nFeature_RNA', 'percent_mito', 'CC_Difference']
 sc.pp.regress_out(adata, keys=regress_out)
+adata.X = csr_matrix(adata.X) # sparse matrix
 
 # scVelo setup
 scv.pp.moments(adata, n_pcs=30, n_neighbors=30, use_highly_variable=True)
+adata.layers["Ms"] = adata(norm_counts.layers["Ms"])
+adata.layers["Mu"] = adata(norm_counts.layers["Mu"])
 scv.tl.recover_dynamics(adata, n_jobs=20)
 scv.tl.velocity(adata, mode='dynamical', use_highly_variable=True)
 scv.tl.velocity_graph(adata, n_jobs=20)
