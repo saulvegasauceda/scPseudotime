@@ -53,8 +53,8 @@ adata.X = csr_matrix(adata.X) # sparse matrix
 
 # scVelo setup
 scv.pp.moments(adata, n_pcs=30, n_neighbors=30, use_highly_variable=True)
-adata.layers["Ms"] = adata(norm_counts.layers["Ms"])
-adata.layers["Mu"] = adata(norm_counts.layers["Mu"])
+adata.layers["Ms"] = csr_matrix(adata.layers["Ms"])
+adata.layers["Mu"] = csr_matrix(adata.layers["Mu"])
 scv.tl.recover_dynamics(adata, n_jobs=20)
 scv.tl.velocity(adata, mode='dynamical', use_highly_variable=True)
 scv.tl.velocity_graph(adata, n_jobs=20)
